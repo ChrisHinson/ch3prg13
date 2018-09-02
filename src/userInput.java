@@ -12,34 +12,38 @@ public class userInput
         System.out.println("Please enter your subscription level \n A, B, or C");
         plan = keyboard.nextLine();
 
-        while (validInput != Boolean.TRUE)
-        {
-
-            if (validate.validString(plan, "(?i)[ABC]") == Boolean.TRUE) {
-                plan = plan.toUpperCase();
-                System.out.println("Ok, thank you class " +  plan + " customer");
-                validInput = Boolean.TRUE;
-            } else {
-                System.out.println("Sorry, that's not a valid subscription plan, please try again");
-                plan = keyboard.nextLine();
+            do {
+                if (validate.validString(plan, "(?i)[ABC]") == Boolean.TRUE) {
+                    plan = plan.toUpperCase();
+                    System.out.println("Ok, thank you class " + plan + " customer");
+                    validInput = Boolean.TRUE;
+                } else {
+                    System.out.println("Sorry, that's not a valid subscription plan, please try again");
+                    plan = keyboard.nextLine();
+                }
             }
-        }
+            while (validInput != Boolean.TRUE);
+
+
         return plan;
     }
 
     public int getHours()
     {
-        int hours = -1;
+        Boolean validated = Boolean.FALSE;
+        int hours;
 
         do {
             System.out.println("Please enter the amount of hours you have used this month.");
-            if (keyboard.hasNextInt()) {
-                hours = keyboard.nextInt();
-            } else {
-                System.out.println("That's not a valid number of hours please try again");
 
+            while (!keyboard.hasNextInt())
+            {
+                System.out.println("Sorry, that's not a valid number, please try again");
+                keyboard.next();
             }
-        } while (hours < 0);
+            hours = keyboard.nextInt();
+            validated = Boolean.TRUE;
+        } while (!validated);
 
 
         return hours;
@@ -51,23 +55,25 @@ public class userInput
         Boolean overcharge;
         String plan = bracket;
 
-                if (plan.matches("A")) {
+        if (plan.matches("A"))
+        {
                     if (hours > 10) {
                         System.out.println("You have gone over your plan's allotted hours per month, overage rates are $2 per hour");
                         overcharge =  Boolean.TRUE;
                     } else {
                         overcharge =  Boolean.FALSE;
                     }
-                } else if (plan.matches("B")) {
+        } else if (plan.matches("B"))
+        {
                     if (hours > 20) {
                         System.out.println("You have gone over your plan's allotted hours per month, overage rates are $1 per hour");
                         overcharge = Boolean.TRUE;
                     } else {
                         overcharge = Boolean.FALSE;
                     }
-                } else {
+        } else {
                     overcharge = Boolean.FALSE;
-                }
+        }
         return overcharge;
     }
     }

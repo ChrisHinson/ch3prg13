@@ -6,12 +6,18 @@ public class main
 
         String plan;
         int hours;
-        Boolean overcharge;
+        double overcharge;
+        double basecharge;
+        double totalCharge;
 
         plan = in.getPlan();
         hours = in.getHours();
 
+        basecharge = in.baseCharge(plan, hours);
         overcharge = in.overCharge(plan, hours);
 
+        totalCharge = basecharge + overcharge;
+
+        System.out.println("You total charge for the month is $" + totalCharge + "\nThank you for choosing GreatISP.");
     }
 }

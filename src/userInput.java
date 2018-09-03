@@ -38,6 +38,11 @@ public class userInput
 
             while (!keyboard.hasNextInt())
             {
+                while (keyboard.hasNextDouble())
+                {
+                    System.out.println("Sorry, only whole numbers of hours are acceptable");
+                    keyboard.next();
+                }
                 System.out.println("Sorry, that's not a valid number, please try again");
                 keyboard.next();
             }
